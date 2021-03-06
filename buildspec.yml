@@ -17,6 +17,7 @@ phases:
     commands:
       - echo Build started on `date`
       - ./mvnw install
+      - ./mvnw deploy
       - JAR_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
       ## Now building the Docker image with the docker CLI
       - echo Building the Docker image...

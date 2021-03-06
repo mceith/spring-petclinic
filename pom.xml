@@ -369,5 +369,13 @@
       </build>
     </profile>
   </profiles>
+  
+  <distributionManagement>
+    <repository>
+      <id>example-org-artifacts--maven-artifacts</id>
+      <name>example-org-artifacts--maven-artifacts</name>
+      <url>https://example-org-artifacts-${env.AWS_ACCOUNT_ID}.d.codeartifact.eu-west-1.amazonaws.com/maven/maven-artifacts/</url>
+    </repository>
+  </distributionManagement>
 
 </project>
