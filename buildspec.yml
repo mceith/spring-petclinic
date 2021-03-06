@@ -4,10 +4,15 @@ phases:
   install:
     runtime-versions:
       java: corretto11
+    commands:
+      - echo Copying settings.xml file for Codeartifact
+      - cp ./settings.xml /root/.m2/settings.xml
   pre_build: ## New pre-build phase for authentication to ECR with Docker CLI
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Get Codeartifact Auth token...
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain example-org-artifacts --domain-owner 523550482853 --query authorizationToken --output text`
   build:
     commands:
       - echo Build started on `date`
@@ -23,3 +28,17 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/petclinic:$JAR_VERSION
+cache:
+  paths:
+    - '/root/.m2/**/*'
+reports:
+  unit-tests-report: # For Unit Test Reports
+    files:
+      - '**/*'
+    base-directory: 'target/surefire-reports'
+    discard-paths: false
+  code-coverage-report: # For Code Coverage Reports
+    files:
+      - jacoco.xml
+    file-format: 'JaCoCoXml'
+    base-directory: 'target/site/jacoco'

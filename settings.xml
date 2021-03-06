@@ -1,0 +1,31 @@
+<settings>
+    <profiles>
+      <profile>
+        <id>example-org-artifacts--maven-artifacts</id>
+        <activation>
+          <activeByDefault>true</activeByDefault>
+        </activation>
+        <repositories>
+          <repository>
+            <id>example-org-artifacts--maven-artifacts</id>
+            <url>https://example-org-artifacts-${env.AWS_ACCOUNT_ID}.d.codeartifact.eu-west-1.amazonaws.com/maven/maven-artifacts/</url>
+          </repository>
+        </repositories>
+      </profile>
+    </profiles>
+    <servers>
+      <server>
+        <id>example-org-artifacts--maven-artifacts</id>
+        <username>aws</username>
+        <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
+      </server>
+    </servers>
+    <mirrors>
+      <mirror>
+        <id>example-org-artifacts--maven-artifacts</id>
+        <name>example-org-artifacts--maven-artifacts</name>
+        <url>https://example-org-artifacts-${env.AWS_ACCOUNT_ID}.d.codeartifact.eu-west-1.amazonaws.com/maven/maven-artifacts/</url>
+        <mirrorOf>*</mirrorOf>
+      </mirror>
+    </mirrors>
+</settings>
