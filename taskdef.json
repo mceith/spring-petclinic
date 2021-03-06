@@ -1,0 +1,24 @@
+{
+    "executionRoleArn": "arn:aws:iam::523550482853:role/PetClinicTaskExecutionRole",
+    "containerDefinitions": [
+      {
+        "name": "web",
+        "image": "<IMAGE1_NAME>",
+        "essential": true,
+        "portMappings": [
+          {
+            "protocol": "tcp",
+            "containerPort": 8080
+          }
+        ]
+      }
+    ],
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "512",
+    "memory": "1024",
+    "family": "PetClinicTaskDefinition"
+  }
+  

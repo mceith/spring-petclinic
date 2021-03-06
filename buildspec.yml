@@ -29,7 +29,10 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/petclinic:$JAR_VERSION
-cache:
+      - printf '{"ImageURI":"%s.dkr.ecr.%s.amazonaws.com/petclinic:%s"}' "$AWS_ACCOUNT_ID" "$AWS_DEFAULT_REGION" "$JAR_VERSION" > imageDetail.json
+artifacts:
+  files:
+    - imageDetail.json
   paths:
     - '/root/.m2/**/*'
 reports:
