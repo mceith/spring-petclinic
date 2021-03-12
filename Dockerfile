@@ -1,4 +1,5 @@
-FROM amazoncorretto
+#FROM amazoncorretto
+FROM 489478819445.dkr.ecr.eu-west-1.amazonaws.com/amazoncorretto:latest
 VOLUME /tmp
 ARG JAR_FILE
 ADD ./target/${JAR_FILE} app.jar

@@ -11,6 +11,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login --no-include-email --registry-id 489478819445 --region $AWS_DEFAULT_REGION)
       - echo Get Codeartifact Auth token...
       - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain example-org-artifacts --domain-owner 523550482853 --query authorizationToken --output text`
   build:
